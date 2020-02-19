@@ -436,7 +436,7 @@ class Vehicle(object):
         """
         return np.linalg.norm(self.getRelativeVelocity()) 
 
-    def getAOA(self):
+    def getAOA(self) -> object:
         """TODO: Docstring for getAOA.
         :returns: TODO
 

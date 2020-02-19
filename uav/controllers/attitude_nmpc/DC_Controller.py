@@ -7,7 +7,7 @@ import lib.geometry.numpy_geometry as ng
 importlib.reload(ng)
 
 from sys import path
-path.append(r"/home/dirkpr/casadi_all/casadi_py35")
+#path.append(r"/home/dirkpr/casadi_all/casadi_py35")
 import casadi as cs
 import numpy as np
 import matplotlib.pyplot as plt
@@ -433,7 +433,8 @@ class Controller(object):
         N = self.data['N']
         tgrid = np.linspace(0, T, N+1)
 
-        if False: # Plot NLP Solution at each iteration
+        if False:
+            # Plot NLP Solution at each iteration
             fig, ax = plt.subplots(3,1)
             ax[0].plot(tgrid, Va_opt)
             ax[0].plot(tgrid, Va_ref, '--')

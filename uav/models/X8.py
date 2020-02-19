@@ -23,7 +23,10 @@ def dragForce(Vr, alpha, beta, q, delta_e, P, stall=False): #{{{2
     if stall:
         C_D_alpha = compute_C_D_alpha(alpha, P)
     else:
-        C_D_alpha = P['C_D_0'] + P['C_D_alpha1']*alpha# + P['C_D_alpha2']*alpha**2
+        if P['wear']:
+            C_D_alpha = (P['C_D_0'] + (0.05) ) +  (P['C_D_alpha1'] +2*alpha )*alpha
+        else:
+            C_D_alpha = P['C_D_0'] + P['C_D_alpha1'] * alpha # + P['C_D_alpha2']*alpha**2
 
     D =  0.25 * P['S_wing'] * P['rho'] * Vr *\
             (P['C_D_q']*P['c']*q 
@@ -37,7 +40,10 @@ def liftForce(Vr, alpha, q, delta_e, P, stall=False):#{{{2
     if stall:
         C_L_alpha = compute_C_L_alpha(alpha, P)
     else:
-        C_L_alpha = P['C_L_0'] + P['C_L_alpha']*alpha
+        if P['wear']:
+            C_L_alpha = (P['C_L_0'] + (-0.1)) + (P['C_L_alpha'] - 0.2) * alpha
+        else:
+            C_L_alpha = P['C_L_0'] + P['C_L_alpha']*alpha
 
     L =  0.25 * P['S_wing'] * P['rho'] * Vr * (P['C_L_q']*P['c']*q \
             # + 2*Vr*(P['C_L_0'] + P['C_L_alpha']*alpha \
